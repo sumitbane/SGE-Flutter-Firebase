@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "21737136480",
+    "firebase_url": "https://settlegroupexpenses.firebaseio.com",
+    "project_id": "settlegroupexpenses",
+    "storage_bucket": "settlegroupexpenses.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21737136480:android:e49ba9259d367b1c493e05",
+        "android_client_info": {
+          "package_name": "com.sumitbane.settle_group_expenses"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "21737136480-q97um2vn64p32070r81bqqftqegiqhtl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sumitbane.settle_group_expenses",
+            "certificate_hash": "7d39e9e0e56a73ee90dcc4bb789e6e6b3e5111ee"
+          }
+        },
+        {
+          "client_id": "21737136480-n000dl1013tq213d5j0ljv69ump3uvup.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDW_CBWX4XdeO9kBRA865TAvbFNXt2fN08"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "21737136480-n000dl1013tq213d5j0ljv69ump3uvup.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
