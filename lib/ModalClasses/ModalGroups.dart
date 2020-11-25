@@ -6,6 +6,4 @@ class Groups{
 
   Groups({this.gname, this.currency, this.destination, this.description});
 
-
-
 }
