@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:settle_group_expenses/ModalClasses/ModalGroups.dart';
+import 'package:settle_group_expenses/ModalClasses/modal_groups.dart';
 
 class GroupList extends StatefulWidget {
   @override

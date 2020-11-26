@@ -2,26 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:settle_group_expenses/Animations/page_anim_elastic_out.dart';
 import 'package:settle_group_expenses/Lists/group_list.dart';
-import 'package:settle_group_expenses/ModalClasses/ModalGroups.dart';
+import 'package:settle_group_expenses/ModalClasses/modal_groups.dart';
 import 'package:settle_group_expenses/Screens/CreateGroup.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:settle_group_expenses/Services/database.dart';
 
-void main() async{
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: Home(),
-  ));
-}
-
-class Home extends StatefulWidget {
+class Group extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _GroupState createState() => _GroupState();
 }
 
-class _HomeState extends State<Home> {
+class _GroupState extends State<Group> {
   @override
   Widget build(BuildContext context) {
 

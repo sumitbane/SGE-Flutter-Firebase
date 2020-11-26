@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:settle_group_expenses/Components/rounded_button.dart';
 import 'package:settle_group_expenses/Components/rounded_input_field.dart';
