@@ -10,10 +10,10 @@ class CreatGroup extends StatefulWidget {
 
 class _CreatGroupState extends State<CreatGroup> {
 
-  String gname;
-  String currency = 'INR';
-  String destination;
-  String description;
+  String _gname;
+  String _currency = 'INR';
+  String _destination;
+  String _description;
 
   final tec_gname = new TextEditingController();
   final tec_destination = new TextEditingController();
@@ -55,12 +55,12 @@ class _CreatGroupState extends State<CreatGroup> {
               text: 'Save',
               onPressed: () async {
 
-                gname = tec_gname.text;
-                destination = tec_destination.text;
-                description = tec_description.text;
+                _gname = tec_gname.text;
+                _destination = tec_destination.text;
+                _description = tec_description.text;
 
               //  creating group in firestore
-                await DatabaseService().createGroup(gname, currency, destination, description);
+                await DatabaseService().createGroup(_gname, _currency, _destination, _description);
 
                 tec_gname.clear();
                 tec_destination.clear();
@@ -84,7 +84,7 @@ class _CreatGroupState extends State<CreatGroup> {
               borderRadius: BorderRadius.circular(29),
             ),
             child: DropdownButton<String>(
-              value: currency,
+              value: _currency,
               underline: Container(height: 0,),
               icon: Container(
                   margin: EdgeInsets.fromLTRB(10,0,0,0),
@@ -97,7 +97,7 @@ class _CreatGroupState extends State<CreatGroup> {
               ),
               onChanged: (String newValue){
                 setState(() {
-                  currency = newValue;
+                  _currency = newValue;
                 });
               },
               items: <String>[

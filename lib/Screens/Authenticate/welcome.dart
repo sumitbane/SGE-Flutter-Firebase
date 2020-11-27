@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:settle_group_expenses/Animations/page_anim_elastic_out.dart';
 import 'package:settle_group_expenses/Components/rounded_button.dart';
 import 'package:settle_group_expenses/Constants/constants.dart';
+import 'package:settle_group_expenses/Screens/Authenticate/login.dart';
+import 'package:settle_group_expenses/Screens/Authenticate/register.dart';
 
 class Welcome extends StatefulWidget {
   @override
@@ -35,7 +39,12 @@ class _WelcomeState extends State<Welcome> {
             ),
             // SizedBox(height: size.height*0.05,),
             Spacer(flex: 3,),
-            RoundedButtonContainer(text: 'Login',),
+            RoundedButtonContainer(
+              text: 'Login',
+              onPressed: (){
+                Navigator.push(context, PageAnimElasticOut(Login()));
+              },
+            ),
             // SizedBox(height: size.height*0.05,),
             Spacer(),
             Row(
@@ -58,7 +67,9 @@ class _WelcomeState extends State<Welcome> {
                       color: Colors.deepPurple,
                     ),
                   ),
-                  onTap: (){},
+                  onTap: (){
+                    Navigator.push(context, PageAnimElasticOut(Register()));
+                  },
                 ),
               ],
 
