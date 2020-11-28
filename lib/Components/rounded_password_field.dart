@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:settle_group_expenses/Components/text_field_container.dart';
 
-class RoundedInputField extends StatelessWidget {
+class RoundedPasswordField extends StatelessWidget {
 
   final String hintText;
   final controller;
+  final bool obscureText;
   final keyboardType;
   final maxLength;
 
-  const RoundedInputField({
+  const RoundedPasswordField({
     Key key,
     this.controller,
     this.hintText,
+    this.obscureText,
     this.keyboardType,
     this.maxLength,
   }) : super(key: key);
@@ -21,11 +23,11 @@ class RoundedInputField extends StatelessWidget {
     return TextFieldContainer(
       child: TextField(
         controller: controller,
+        obscureText: obscureText,
         maxLength: maxLength,
         keyboardType: keyboardType,
         decoration: InputDecoration(
           hintText: hintText,
-          // to hide the length in the container
           counterText: '',
           hintStyle: TextStyle(
             color: Colors.black26,
