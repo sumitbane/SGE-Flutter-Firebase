@@ -34,144 +34,144 @@ class _RegisterState extends State<Register> {
       body: Container(
         height: size.height,
         width: double.infinity,
-        child: Form(
-          key: _formKey ,
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: size.height*0.1,),
-              Text(
-                'Create a new account',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: PrimaryColor,
-                  fontWeight: FontWeight.bold,
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: size.height*0.1,),
+            Text(
+              'Create a new account',
+              style: TextStyle(
+                fontSize: 15,
+                color: PrimaryColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: size.height*0.04,),
+            Divider(
+              thickness: 2,
+              indent: size.width*0.02,
+              endIndent: size.width*0.02,
+            ),
+            SizedBox(height: size.height*0.03,),
+            RoundedInputField(
+              controller: tec_name,
+              maxLength: 20,
+              hintText: 'Name',
+            ),
+            SizedBox(height: size.height*0.02,),
+            RoundedInputField(
+              controller: tec_email,
+              maxLength: 20,
+              hintText: 'Email',
+            ),
+            SizedBox(height: size.height*0.02,),
+            RoundedPasswordField(
+              controller: tec_password,
+              obscureText: true,
+              maxLength: 20,
+              hintText: 'Password',
+            ),
+            SizedBox(height: size.height*0.02,),
+            RoundedInputField(
+              controller: tec_phone,
+              maxLength: 10,
+              keyboardType: TextInputType.number,
+              hintText: 'Phone',
+            ),
+            SizedBox(height: size.height*0.02,),
+            RoundedButtonContainer(
+              text: 'Register',
+              onPressed: (){
+
+                _name = tec_name.text;
+                _email = tec_email.text;
+                _password = tec_password.text;
+                _phone = tec_phone.text;
+
+                if(_name == ''){
+                  Fluttertoast.showToast(
+                    msg: 'Enter a name',
+                    toastLength: Toast.LENGTH_SHORT,
+                    backgroundColor: Colors.red[500],
+                    textColor: Colors.white,
+                  );
+                }
+                else if(_email == ''){
+                  Fluttertoast.showToast(
+                    msg: 'Enter an email',
+                    toastLength: Toast.LENGTH_SHORT,
+                    backgroundColor: Colors.red[500],
+                    textColor: Colors.white,
+                  );
+                }
+                else if(! _email.contains('@') || ! _email.contains('.')){
+                  Fluttertoast.showToast(
+                    msg: 'Enter a valid email',
+                    toastLength: Toast.LENGTH_SHORT,
+                    backgroundColor: Colors.red[500],
+                    textColor: Colors.white,
+                  );
+                }
+                else if(_password == ''){
+                  Fluttertoast.showToast(
+                    msg: 'Enter a password',
+                    toastLength: Toast.LENGTH_SHORT,
+                    backgroundColor: Colors.red[500],
+                    textColor: Colors.white,
+                  );
+                }
+                else if(_password.length < 8){
+                  Fluttertoast.showToast(
+                    msg: 'Password must be at least 8 characters long',
+                    toastLength: Toast.LENGTH_SHORT,
+                    backgroundColor: Colors.red[500],
+                    textColor: Colors.white,
+                  );
+                }
+                else if(_phone.isNotEmpty && _phone.length < 10){
+                  Fluttertoast.showToast(
+                    msg: 'Phone number must 10 characters long',
+                    toastLength: Toast.LENGTH_SHORT,
+                    backgroundColor: Colors.red[500],
+                    textColor: Colors.white,
+                  );
+                }
+                else{
+                  //  auth
+                  dynamic result = _auth.registerWithEmailAndPassword(_email, _password);
+                  if(result == null){
+                    Fluttertoast.showToast(msg: 'Error');
+                  }
+
+                  tec_name.clear();
+                  tec_email.clear();
+                  tec_password.clear();
+                  tec_phone.clear();
+                }
+              },
+            ),
+            SizedBox(height: size.height*0.02,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Already have an account?'
                 ),
-              ),
-              SizedBox(height: size.height*0.04,),
-              Divider(
-                thickness: 2,
-                indent: size.width*0.02,
-                endIndent: size.width*0.02,
-              ),
-              SizedBox(height: size.height*0.03,),
-              RoundedInputField(
-                controller: tec_name,
-                maxLength: 20,
-                hintText: 'Name',
-              ),
-              SizedBox(height: size.height*0.02,),
-              RoundedInputField(
-                controller: tec_email,
-                maxLength: 20,
-                hintText: 'Email',
-              ),
-              SizedBox(height: size.height*0.02,),
-              RoundedPasswordField(
-                controller: tec_password,
-                obscureText: true,
-                maxLength: 20,
-                hintText: 'Password',
-              ),
-              SizedBox(height: size.height*0.02,),
-              RoundedInputField(
-                controller: tec_phone,
-                maxLength: 10,
-                keyboardType: TextInputType.number,
-                hintText: 'Phone',
-              ),
-              SizedBox(height: size.height*0.02,),
-              RoundedButtonContainer(
-                text: 'Register',
-                onPressed: (){
-
-                  _name = tec_name.text;
-                  _email = tec_email.text;
-                  _password = tec_password.text;
-                  _phone = tec_phone.text;
-
-                  if(_name == ''){
-                    Fluttertoast.showToast(
-                      msg: 'Enter a name',
-                      toastLength: Toast.LENGTH_SHORT,
-                      backgroundColor: Colors.black87,
-                      textColor: Colors.white,
-                    );
-                  }
-                  else if(_email == ''){
-                    Fluttertoast.showToast(
-                      msg: 'Enter an email',
-                      toastLength: Toast.LENGTH_SHORT,
-                      backgroundColor: Colors.black87,
-                      textColor: Colors.white,
-                    );
-                  }
-                  else if(! _email.contains('@') || ! _email.contains('.')){
-                    Fluttertoast.showToast(
-                      msg: 'Enter a valid email',
-                      toastLength: Toast.LENGTH_SHORT,
-                      backgroundColor: Colors.black87,
-                      textColor: Colors.white,
-                    );
-                  }
-                  else if(_password == ''){
-                    Fluttertoast.showToast(
-                      msg: 'Enter a password',
-                      toastLength: Toast.LENGTH_SHORT,
-                      backgroundColor: Colors.black87,
-                      textColor: Colors.white,
-                    );
-                  }
-                  else if(_password.length < 8){
-                    Fluttertoast.showToast(
-                      msg: 'Password must be at least 8 characters long',
-                      toastLength: Toast.LENGTH_SHORT,
-                      backgroundColor: Colors.black87,
-                      textColor: Colors.white,
-                    );
-                  }
-                  else if(_phone.isNotEmpty && _phone.length < 10){
-                    Fluttertoast.showToast(
-                      msg: 'Phone number must 10 characters long',
-                      toastLength: Toast.LENGTH_SHORT,
-                      backgroundColor: Colors.black87,
-                      textColor: Colors.white,
-                    );
-                  }
-                  else{
-
-                    //  auth
-
-                    tec_name.clear();
-                    tec_email.clear();
-                    tec_password.clear();
-                    tec_phone.clear();
-                  }
-                },
-              ),
-              SizedBox(height: size.height*0.02,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'Already have an account?'
-                  ),
-                  SizedBox(width: 10,),
-                  InkWell(
-                    child: Text(
-                      'Login',
-                      style: TextStyle(
-                        color: PrimaryColor,
-                        fontWeight: FontWeight.bold,
-                      ),
+                SizedBox(width: 10,),
+                InkWell(
+                  child: Text(
+                    'Login',
+                    style: TextStyle(
+                      color: PrimaryColor,
+                      fontWeight: FontWeight.bold,
                     ),
-                    onTap: (){
-                      Navigator.push(context, PageAnimElasticOut(Login()));
-                    },
                   ),
-                ],
-              ),
-            ],
-          ),
+                  onTap: (){
+                    Navigator.pushReplacement(context, PageAnimElasticOut(Login()));
+                  },
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

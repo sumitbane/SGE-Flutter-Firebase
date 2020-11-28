@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:settle_group_expenses/Animations/page_anim_elastic_out.dart';
 import 'package:settle_group_expenses/Components/rounded_button.dart';
 import 'package:settle_group_expenses/Components/rounded_input_field.dart';
@@ -57,10 +58,46 @@ class _LoginState extends State<Login> {
                 _email = tec_email.text;
                 _password = tec_password.text;
 
-              //  auth
+                if(_email == ''){
+                  Fluttertoast.showToast(
+                    msg: 'Enter an email',
+                    toastLength: Toast.LENGTH_SHORT,
+                    backgroundColor: Colors.red[500],
+                    textColor: Colors.white,
+                  );
+                }
+                else if(! _email.contains('@') || ! _email.contains('.')){
+                  Fluttertoast.showToast(
+                    msg: 'Enter a valid email',
+                    toastLength: Toast.LENGTH_SHORT,
+                    backgroundColor: Colors.red[500],
+                    textColor: Colors.white,
+                  );
+                }
+                else if(_password == ''){
+                  Fluttertoast.showToast(
+                    msg: 'Enter a password',
+                    toastLength: Toast.LENGTH_SHORT,
+                    backgroundColor: Colors.red[500],
+                    textColor: Colors.white,
+                  );
+                }
+                else if(_password.length < 8){
+                  Fluttertoast.showToast(
+                    msg: 'Password must be at least 8 characters long',
+                    toastLength: Toast.LENGTH_SHORT,
+                    backgroundColor: Colors.red[500],
+                    textColor: Colors.white,
+                  );
+                }
+                else{
+                  //  auth
 
-                tec_email.clear();
-                tec_password.clear();
+                  tec_email.clear();
+                  tec_password.clear();
+                }
+
+
               },
             ),
             SizedBox(height: size.height*0.02,),
@@ -80,7 +117,8 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   onTap: (){
-                    Navigator.push(context, PageAnimElasticOut(Register()));
+                    // Pop current screen and push new screen
+                    Navigator.pushReplacement(context, PageAnimElasticOut(Register()));
                   },
                 ),
               ],
