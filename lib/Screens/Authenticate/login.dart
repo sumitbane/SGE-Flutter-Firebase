@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:settle_group_expenses/Animations/page_anim_elastic_out.dart';
+import 'package:settle_group_expenses/CheckState/main.dart';
+import 'package:settle_group_expenses/CheckState/wrapper.dart';
 import 'package:settle_group_expenses/Components/rounded_button.dart';
 import 'package:settle_group_expenses/Components/rounded_input_field.dart';
 import 'package:settle_group_expenses/Constants/constants.dart';
 import 'package:settle_group_expenses/Screens/Authenticate/register.dart';
+import 'package:settle_group_expenses/Screens/Authenticate/welcome.dart';
+import 'package:settle_group_expenses/Screens/Groups.dart';
+import 'package:settle_group_expenses/Services/auth.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -13,8 +18,8 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
 
+  final AuthService _auth = AuthService();
   String _email, _password;
-
   final tec_email = new TextEditingController();
   final tec_password = new TextEditingController();
 
@@ -92,9 +97,13 @@ class _LoginState extends State<Login> {
                 }
                 else{
                   //  auth
+                  dynamic result = _auth.signInWithEmailAndPassword(_email, _password);
 
-                  tec_email.clear();
-                  tec_password.clear();
+                  if(result != null){
+                    Navigator.pushAndRemoveUntil(context, PageAnimElasticOut(Group()), (Route<dynamic> route) => false);
+                    tec_email.clear();
+                    tec_password.clear();
+                  }
                 }
 
 

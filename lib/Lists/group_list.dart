@@ -13,7 +13,7 @@ class _GroupListState extends State<GroupList> {
 
     final groups = Provider.of<List<Groups>>(context);
 
-    return Padding(
+    return groups == null ? Center(child: CircularProgressIndicator(),) : Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       child: Column(
         children: <Widget> [

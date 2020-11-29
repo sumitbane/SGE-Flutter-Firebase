@@ -9,6 +9,8 @@ import 'package:settle_group_expenses/Constants/constants.dart';
 import 'package:settle_group_expenses/Screens/Authenticate/login.dart';
 import 'package:settle_group_expenses/Services/auth.dart';
 
+import '../Groups.dart';
+
 class Register extends StatefulWidget {
   @override
   _RegisterState createState() => _RegisterState();
@@ -17,7 +19,6 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
 
   final AuthService _auth = AuthService();
-  final _formKey = GlobalKey<FormState>();
   String _name, _email, _password, _phone;
 
   final tec_name = new TextEditingController();
@@ -138,14 +139,14 @@ class _RegisterState extends State<Register> {
                 else{
                   //  auth
                   dynamic result = _auth.registerWithEmailAndPassword(_email, _password);
-                  if(result == null){
-                    Fluttertoast.showToast(msg: 'Error');
-                  }
 
-                  tec_name.clear();
-                  tec_email.clear();
-                  tec_password.clear();
-                  tec_phone.clear();
+                  if(result != null){
+                    Navigator.pushAndRemoveUntil(context, PageAnimElasticOut(Group()), (Route<dynamic> route) => false);
+                    tec_name.clear();
+                    tec_email.clear();
+                    tec_password.clear();
+                    tec_phone.clear();
+                  }
                 }
               },
             ),

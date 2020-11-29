@@ -16,7 +16,22 @@ class AuthService{
     return _auth.authStateChanges()
         .map(_userFromFirebaseUser);
   }
+
   //sign in with email and password
+  Future signInWithEmailAndPassword(String email, String password) async {
+    try{
+      UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      User user = result.user;
+      return user;
+    }
+    on FirebaseAuthException catch(e){
+      Fluttertoast.showToast(msg: e.code);
+    }
+    catch(e){
+      print(e);
+      return null;
+    }
+  }
 
   //register with email and password
   Future registerWithEmailAndPassword(String email, String password) async{
@@ -24,6 +39,13 @@ class AuthService{
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       User user = result.user;
       return _userFromFirebaseUser(user);
+    }
+    on FirebaseAuthException catch(e){
+      Fluttertoast.showToast(msg: e.code);
+    }
+    catch(e){
+      print(e);
+      return null;
     }
     catch(e){
       Fluttertoast.showToast(msg: e);
@@ -38,6 +60,7 @@ class AuthService{
     }
     catch(e){
       Fluttertoast.showToast(msg: e);
+      return null;
     }
   }
 
