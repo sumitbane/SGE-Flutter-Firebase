@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:settle_group_expenses/Animations/page_anim_elastic_out.dart';
+import 'file:///D:/FlutterApps/settle_group_expenses/lib/Animations/PageAnimations/page_anim_elastic_out.dart';
 import 'package:settle_group_expenses/Components/rounded_button.dart';
 import 'package:settle_group_expenses/Components/rounded_input_field.dart';
 import 'package:settle_group_expenses/Components/rounded_password_field.dart';

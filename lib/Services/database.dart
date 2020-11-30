@@ -8,7 +8,7 @@ import 'package:settle_group_expenses/ModalClasses/modal_groups.dart';
 class DatabaseService{
 
   final String uid;
-  DatabaseService({this.uid});
+  DatabaseService(this.uid);
 
   // Collection reference
   final CollectionReference coll_groups = FirebaseFirestore.instance.collection('Users');
@@ -24,6 +24,12 @@ class DatabaseService{
       'phone' : phone,
     });
   }
+
+  // Future demo() async{
+  //   DocumentReference docRef = await
+  //   FirebaseFirestore.instance.collection('gameLevels');
+  //   print(docRef.id);
+  // }
 
   // Create a new group
   Future<void> createGroup(String gname, String currency, String destination, String description) async{
@@ -49,9 +55,30 @@ class DatabaseService{
     ));
   }
 
-  //Read
+  // Document reference
 
-  //Get all groups
+  // Add Members
+  Future<void> addMember(String gid, String mname, String phone, int budget) async {
+    return await coll_groups.doc(uid).collection('Groups').doc(gid).collection('Members').doc().set({
+      'mname': mname,
+      'phone': phone,
+      'budget': budget,
+    })
+        .then((value) => Fluttertoast.showToast(
+      msg: 'Member added',
+      backgroundColor: Colors.black87,
+      textColor: Colors.white,
+    ))
+        .catchError((error) => Fluttertoast.showToast(
+      msg: null,
+      backgroundColor: Colors.black87,
+      textColor: Colors.white,
+    ));
+  }
+
+  // Read
+
+  // Get all groups
 
   Stream<List<Groups>> get getGroups{
     return coll_groups.doc(uid).collection('Groups').snapshots()
@@ -66,10 +93,12 @@ class DatabaseService{
   List <Groups> _groupListFromSnapShot(QuerySnapshot snapshot){
     return snapshot.docs.map((doc) {
       return Groups(
+        gid: doc.id,
         gname: doc.data()['gname'],
         currency: doc.data()['currency'],
         destination: doc.data()['destination'],
-        description: doc.data()['description']
+        description: doc.data()['description'],
+
       );
     }).toList();
   }

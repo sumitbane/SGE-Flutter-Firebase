@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:settle_group_expenses/Components/rounded_button.dart';
 import 'package:settle_group_expenses/Components/rounded_input_field.dart';
+import 'package:settle_group_expenses/Constants/constants.dart';
 import 'package:settle_group_expenses/Services/database.dart';
 
 class CreateGroup extends StatefulWidget {
@@ -31,11 +32,11 @@ class _CreateGroupState extends State<CreateGroup> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Create Group'),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: PrimaryColor,
       ),
       body: Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          // crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: 10,),
             RoundedInputField(
@@ -64,7 +65,7 @@ class _CreateGroupState extends State<CreateGroup> {
                 _description = tec_description.text;
 
               //  creating group in firestore
-                await DatabaseService(uid: uid).createGroup(_gname, _currency, _destination, _description);
+                await DatabaseService(uid).createGroup(_gname, _currency, _destination, _description);
 
                 tec_gname.clear();
                 tec_destination.clear();

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:settle_group_expenses/Animations/page_anim_elastic_out.dart';
+import 'file:///D:/FlutterApps/settle_group_expenses/lib/Animations/PageAnimations/page_anim_elastic_out.dart';
 import 'package:settle_group_expenses/Components/rounded_button.dart';
 import 'package:settle_group_expenses/Constants/constants.dart';
 import 'package:settle_group_expenses/Screens/Authenticate/login.dart';

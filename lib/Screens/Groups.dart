@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:settle_group_expenses/Animations/page_anim_elastic_out.dart';
-import 'package:settle_group_expenses/Animations/page_anim_with_argument.dart';
+import 'package:settle_group_expenses/Animations/PageAnimations/move_to_create_group.dart';
+import 'package:settle_group_expenses/Constants/constants.dart';
 import 'package:settle_group_expenses/Lists/group_list.dart';
 import 'package:settle_group_expenses/ModalClasses/modal_groups.dart';
 import 'package:settle_group_expenses/ModalClasses/modal_user.dart';
@@ -33,7 +33,7 @@ class _GroupState extends State<Group> {
     final String uid =  user.uid;
 
     return StreamProvider<List<Groups>>.value(
-      value: DatabaseService().getGroups,
+      value: DatabaseService(uid).getGroups,
       child: Scaffold(
         appBar: AppBar(
           title: Text('Settle Group Expenses'),
@@ -50,18 +50,17 @@ class _GroupState extends State<Group> {
               },
             ),
           ],
-          backgroundColor: Colors.deepPurple,
+          backgroundColor: PrimaryColor,
         ),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: (){
-            print(uid);
             Navigator.push(context,
-              PageAnimWithArgument(CreateGroup(), uid),
+              MoveToCreatGroup(CreateGroup(), uid),
             );
           },
         ),
-        body: GroupList(),
+        body: GroupList(uid: uid,),
       ),
     );
   }

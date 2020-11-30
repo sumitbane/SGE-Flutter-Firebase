@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 
-class PageAnimWithArgument extends PageRouteBuilder{
+class MoveToCreatGroup extends PageRouteBuilder{
 
   final Widget widget;
   final String uid;
 
-  PageAnimWithArgument(this.widget, this.uid):
+  MoveToCreatGroup(this.widget, this.uid):
         super(
         transitionDuration: Duration(milliseconds: 500),
         transitionsBuilder: (context, animation, animationTime, child){
