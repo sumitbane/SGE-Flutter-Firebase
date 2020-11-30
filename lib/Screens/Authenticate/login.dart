@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:settle_group_expenses/Animations/page_anim_elastic_out.dart';
-import 'package:settle_group_expenses/CheckState/main.dart';
-import 'package:settle_group_expenses/CheckState/wrapper.dart';
 import 'package:settle_group_expenses/Components/rounded_button.dart';
 import 'package:settle_group_expenses/Components/rounded_input_field.dart';
+import 'package:settle_group_expenses/Components/rounded_password_field.dart';
 import 'package:settle_group_expenses/Constants/constants.dart';
 import 'package:settle_group_expenses/Screens/Authenticate/register.dart';
-import 'package:settle_group_expenses/Screens/Authenticate/welcome.dart';
-import 'package:settle_group_expenses/Screens/Groups.dart';
 import 'package:settle_group_expenses/Services/auth.dart';
+import 'package:settle_group_expenses/Shared/loading.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -22,11 +20,12 @@ class _LoginState extends State<Login> {
   String _email, _password;
   final tec_email = new TextEditingController();
   final tec_password = new TextEditingController();
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       body: Container(
         height: size.height,
         width: double.infinity,
@@ -52,8 +51,9 @@ class _LoginState extends State<Login> {
               hintText: 'Email',
             ),
             SizedBox(height: size.height*0.02,),
-            RoundedInputField(
+            RoundedPasswordField(
               controller: tec_password,
+              obscureText: true,
               hintText: 'Password',
             ),
             SizedBox(height: size.height*0.02,),
@@ -96,17 +96,23 @@ class _LoginState extends State<Login> {
                   );
                 }
                 else{
+                  setState(() {
+                    loading = true;
+                  });
                   //  auth
                   dynamic result = _auth.signInWithEmailAndPassword(_email, _password);
+                  print(result);
+
+                  setState(() {
+                    loading = false;
+                  });
 
                   if(result != null){
-                    Navigator.pushAndRemoveUntil(context, PageAnimElasticOut(Group()), (Route<dynamic> route) => false);
+                    // Navigator.pushAndRemoveUntil(context, PageAnimElasticOut(Group()), (Route<dynamic> route) => false);
                     tec_email.clear();
                     tec_password.clear();
                   }
                 }
-
-
               },
             ),
             SizedBox(height: size.height*0.02,),

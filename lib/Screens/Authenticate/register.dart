@@ -8,6 +8,7 @@ import 'package:settle_group_expenses/Components/text_field_container.dart';
 import 'package:settle_group_expenses/Constants/constants.dart';
 import 'package:settle_group_expenses/Screens/Authenticate/login.dart';
 import 'package:settle_group_expenses/Services/auth.dart';
+import 'package:settle_group_expenses/Shared/loading.dart';
 
 import '../Groups.dart';
 
@@ -26,11 +27,13 @@ class _RegisterState extends State<Register> {
   final tec_password = new TextEditingController();
   final tec_phone = new TextEditingController();
 
+  bool loading = false;
+
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       resizeToAvoidBottomPadding: false,
       body: Container(
         height: size.height,
@@ -137,11 +140,18 @@ class _RegisterState extends State<Register> {
                   );
                 }
                 else{
+                  setState(() {
+                    loading = true;
+                  });
                   //  auth
-                  dynamic result = _auth.registerWithEmailAndPassword(_email, _password);
+                  dynamic result = _auth.registerWithEmailAndPassword(_name, _email, _password, _phone);
+
+                  setState(() {
+                    loading = false;
+                  });
 
                   if(result != null){
-                    Navigator.pushAndRemoveUntil(context, PageAnimElasticOut(Group()), (Route<dynamic> route) => false);
+                    // Navigator.pushAndRemoveUntil(context, PageAnimElasticOut(Group()), (Route<dynamic> route) => false);
                     tec_name.clear();
                     tec_email.clear();
                     tec_password.clear();

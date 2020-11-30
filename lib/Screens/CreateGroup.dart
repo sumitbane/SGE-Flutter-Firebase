@@ -3,12 +3,14 @@ import 'package:settle_group_expenses/Components/rounded_button.dart';
 import 'package:settle_group_expenses/Components/rounded_input_field.dart';
 import 'package:settle_group_expenses/Services/database.dart';
 
-class CreatGroup extends StatefulWidget {
+class CreateGroup extends StatefulWidget {
   @override
-  _CreatGroupState createState() => _CreatGroupState();
+  _CreateGroupState createState() => _CreateGroupState();
 }
 
-class _CreatGroupState extends State<CreatGroup> {
+class _CreateGroupState extends State<CreateGroup> {
+
+  Map data = {};
 
   String _gname;
   String _currency = 'INR';
@@ -22,6 +24,8 @@ class _CreatGroupState extends State<CreatGroup> {
   @override
   Widget build(BuildContext context) {
 
+    data = ModalRoute.of(context).settings.arguments;
+    final String uid = data['uid'];
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -60,7 +64,7 @@ class _CreatGroupState extends State<CreatGroup> {
                 _description = tec_description.text;
 
               //  creating group in firestore
-                await DatabaseService().createGroup(_gname, _currency, _destination, _description);
+                await DatabaseService(uid: uid).createGroup(_gname, _currency, _destination, _description);
 
                 tec_gname.clear();
                 tec_destination.clear();

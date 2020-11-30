@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:settle_group_expenses/CheckState/wrapper.dart';
 import 'package:settle_group_expenses/Constants/constants.dart';
 import 'package:settle_group_expenses/ModalClasses/modal_user.dart';
+import 'package:settle_group_expenses/Screens/Authenticate/welcome.dart';
+import 'package:settle_group_expenses/Screens/CreateGroup.dart';
 import 'package:settle_group_expenses/Services/auth.dart';
 
 void main() async{
@@ -20,6 +22,9 @@ class MyApp extends StatelessWidget {
       value: AuthService().user,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        routes: {
+          '/createGroup': (context) => CreateGroup(),
+        },
         theme: ThemeData(
           primaryColor: PrimaryColor,
           scaffoldBackgroundColor: Colors.white,

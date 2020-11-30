@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:settle_group_expenses/ModalClasses/modal_user.dart';
+import 'package:settle_group_expenses/Services/database.dart';
 
 class AuthService{
 
@@ -34,10 +35,13 @@ class AuthService{
   }
 
   //register with email and password
-  Future registerWithEmailAndPassword(String email, String password) async{
+  Future registerWithEmailAndPassword(String name, String email, String password, String phone) async{
     try{
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       User user = result.user;
+      
+      await DatabaseService(uid: user.uid).updateUserData(name, email, password, phone);
+      
       return _userFromFirebaseUser(user);
     }
     on FirebaseAuthException catch(e){

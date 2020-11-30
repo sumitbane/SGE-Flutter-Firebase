@@ -7,14 +7,27 @@ import 'package:settle_group_expenses/ModalClasses/modal_groups.dart';
 
 class DatabaseService{
 
-  //Collection reference
-  final CollectionReference coll_groups = FirebaseFirestore.instance.collection('Groups');
+  final String uid;
+  DatabaseService({this.uid});
 
-  //Create
+  // Collection reference
+  final CollectionReference coll_groups = FirebaseFirestore.instance.collection('Users');
 
-  //Create a new group
+  // Create
+
+  // Create a new user record
+  Future updateUserData(String name, String email, String password, String phone) async {
+    return await coll_groups.doc(uid).set({
+      'name' : name,
+      'email' : email,
+      'password' : password,
+      'phone' : phone,
+    });
+  }
+
+  // Create a new group
   Future<void> createGroup(String gname, String currency, String destination, String description) async{
-    return await coll_groups.doc().set({
+    return await coll_groups.doc(uid).collection('Groups').doc().set({
       'gname' : gname,
       'currency' : currency,
       'destination' : destination,
@@ -41,7 +54,7 @@ class DatabaseService{
   //Get all groups
 
   Stream<List<Groups>> get getGroups{
-    return coll_groups.snapshots()
+    return coll_groups.doc(uid).collection('Groups').snapshots()
         .map((_groupListFromSnapShot));
   }
   //Update
